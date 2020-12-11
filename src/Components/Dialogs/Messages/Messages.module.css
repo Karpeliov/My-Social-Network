@@ -1,0 +1,33 @@
+
+/*.message {*/
+/*    margin: 5px;*/
+/*    !*padding: 0;*!*/
+/*    background-color: azure;*/
+/*    width: 350px;*/
+/*    padding: 5px;*/
+/*    border-radius: 7px;*/
+/*}*/
+
+
+.message {
+    z-index: auto;
+    margin: 5px;
+
+    border-radius: 5px;
+    background: gold;
+    position: relative;
+    width: 300px;
+    height: 35px;
+}
+
+.message::after {
+    z-index: 0;
+    content: '';
+    position: absolute;
+    left: -13px;
+    bottom: 0px;
+    border: 20px solid transparent;
+    border-bottom: 7px solid gold;
+    border-radius: 25px;
+}
+

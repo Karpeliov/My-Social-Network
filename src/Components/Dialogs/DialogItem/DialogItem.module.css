@@ -1,0 +1,22 @@
+
+
+.dialog a {
+    text-decoration: none;
+    color: azure;
+
+}
+
+
+.dialog a.active {
+    color: yellow;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+
+
+.dialog img {
+    width: 60px;
+    height: 60px;
+    border-radius: 30px;
+}

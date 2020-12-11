@@ -1,0 +1,18 @@
+.imgStyle {
+    text-align: center;
+    height: 350px;
+}
+.imgStyle img {
+    /*height: 400px;*/
+    /*overflow: hidden; height: 300px;*/
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+
+.descriptionBlock {
+    padding: 10px;
+}
+
