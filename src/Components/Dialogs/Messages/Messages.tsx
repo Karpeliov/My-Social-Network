@@ -3,13 +3,14 @@ import MessagesStyle from './Messages.module.css';
 
 export type MessPropsType = {
     message: string
-    id?: number
-
+    id: number
+    isMine: boolean
 }
 
 const Message = (MessProps: MessPropsType) => {
-    return(
-        <div className={MessagesStyle.message}> {MessProps.message} </div>
+    return (
+        <div className={MessProps.isMine === true ? MessagesStyle.my_Message : MessagesStyle.message}>
+            {MessProps.message} </div>
 
     )
 }

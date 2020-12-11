@@ -23,12 +23,11 @@ const MyPosts = (props: postsType) => {
 
     const onChangeHandlerNewPost = (e: ChangeEvent<HTMLTextAreaElement>) => {
         // setError(null)
-         setPostMessage(e.currentTarget.value)
+        setPostMessage(e.currentTarget.value)
     }
 
     const AddNewPost = () => {
-
-    props.addNewPost(postMessage)
+        props.addNewPost(postMessage)
         setPostMessage("")
     }
 
@@ -36,11 +35,12 @@ const MyPosts = (props: postsType) => {
         <div className={MyPostCSS.main}>My Posts</div>
 
         <div>
-            {/*onChange={onChangeHandler}*/}
-            <textarea value={postMessage} onChange={onChangeHandlerNewPost} onKeyPress={(e ) => {if (e.ctrlKey === true) AddNewPost() }} />
+             <textarea value={postMessage} onChange={onChangeHandlerNewPost} onKeyPress={(e) => {
+                 if (e.ctrlKey === true) AddNewPost()}}
+             />
             <div>
                 {/*onClick={AddNewPost}*/}
-            <button onClick={AddNewPost}>Add Post</button>
+                <button onClick={AddNewPost}>Add Post</button>
             </div>
         </div>
 

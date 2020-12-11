@@ -8,36 +8,40 @@ import {BrowserRouter, Route} from "react-router-dom";
 import News from "./Components/News/News";
 import Music from "./Components/Music/Music";
 import Settings from "./Components/Settings/Settings";
-import { stateType } from './Redux/State';
+import {stateType, storeType} from './Redux/State';
 
 type appPropsType = {
-    state: stateType
-    addNewPost: (postMessage: string) => void
+    // state: stateType
+    // addNewPost: (postMessage: string) => void
+    // addNewMessage: (message: string, isMine: boolean) => void
+    store: storeType
 }
 
 function App(appProps: appPropsType) {
-
+    const state = appProps.store.getState()
     return (
 
-            <div className='app-wrapper'>
-                <Header/>
-                <Navbar frndState={appProps.state.sideBar.friends}/>
-                <div className='app-wrapper-content'>
-                    {/*<Route path={'/dialogs'} component={Dialogs}/>*/}
+        <div className='app-wrapper'>
+            <Header/>
+            {/*<Navbar frndState={appProps.state.sideBar.friends}/>*/}
+            <Navbar frndState={appProps.store.getState().sideBar.friends}/>
+            <div className='app-wrapper-content'>
+
+                <Route path={'/dialogs'} render={() => <Dialogs
+                    addNewMessage={appProps.store.addNewMessage.bind(appProps.store)} // bind потому что this в вызываемой функции. Иначе undefined
+                    dialogState={state.dialogsPage}/>}/>
+                <Route path={'/profile'} render={() => <Profile
+                    addNewPost={appProps.store.addNewPost.bind(appProps.store)} // bind потому что this в вызываемой функции. Иначе undefined
+                    profileState={state.profilePage}/>}/>
 
 
-                    {/*<Route path={'/profile'} render={() => <Profile posts={appProps.state.profilePage.posts}/>}/>*/}
-                    {/*<Route path={'/dialogs'} render={() => <Dialogs messages={appProps.state.dialogsPage.messages} dialogs={appProps.state.dialogsPage.dialogs}/>}/>*/}
-                    <Route path={'/dialogs'} render={() => <Dialogs dialogState={appProps.state.dialogsPage}/>}/>
-                    <Route path={'/profile'} render={() => <Profile addNewPost={appProps.addNewPost} profileState={appProps.state.profilePage}/>}/>
-
-                    <Route path={'/news'} component={News}/>
-                    <Route path={'/music'} component={Music}/>
-                    <Route path={'/settings'} component={Settings}/>
+                <Route path={'/news'} component={News}/>
+                <Route path={'/music'} component={Music}/>
+                <Route path={'/settings'} component={Settings}/>
 
 
-                </div>
             </div>
+        </div>
 
     );
 }

@@ -3,12 +3,28 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import state, {stateType} from './Redux/State';
-import {addNewPost} from './Redux/State';
+// import state, {addNewMessage, stateType, subscribe} from './Redux/State';
+// import {addNewPost} from './Redux/State';
 import {BrowserRouter} from "react-router-dom";
-import {RenderEntireTree} from "./render";
+import store from './Redux/State';
 
-RenderEntireTree(state)
+
+export let RenderEntireTree = () => {
+    ReactDOM.render(
+        <React.StrictMode>
+            <BrowserRouter>
+                {/*<App addNewPost={addNewPost} addNewMessage={addNewMessage}  state={state}/>*/}
+                <App store={store}/>
+            </BrowserRouter>
+        </React.StrictMode>,
+        document.getElementById('root')
+    );
+}
+
+  RenderEntireTree()
+
+store.subscribe(RenderEntireTree)
+// subscribe(RenderEntireTree)
 
 // ReactDOM.render(
 //   <React.StrictMode>
