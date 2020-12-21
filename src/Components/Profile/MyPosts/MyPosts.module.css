@@ -1,8 +1,14 @@
 .main {
-    margin-top: 10px;
     font-weight: bold;
+    margin-top: 10px;
     padding: 10px;
 }
 
+
+.addPostBtn {
+    margin: 0 0 0 10px;
+    padding: 0 10px;
+    composes: btn from '../../../index.css';
+}
 
 

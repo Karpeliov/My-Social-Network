@@ -1,24 +1,22 @@
 .dialogs {
+    display: grid;
+
     margin-top: 10px;
     margin-left: 10px;
-    display: grid;
     grid-template-columns: 2fr 10fr;
 }
 
-.dialogsItem {
 
+.addMessageBtn {
+    margin: 0 10px 0 10px;
+    padding: 15px 10px;
+
+    composes: btn from '../../index.css';
 }
 
-button {
-    background-color: yellow;
-    border-radius: 10px;
-}
 
 
-.messages {
 
-}
 
-.message {
 
-}
+

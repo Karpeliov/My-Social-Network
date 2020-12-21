@@ -17,22 +17,27 @@ type appPropsType = {
     store: storeType
 }
 
-function App(appProps: appPropsType) {
-    const state = appProps.store.getState()
+function App(props: appPropsType) {
+    const state = props.store.getState()
     return (
 
         <div className='app-wrapper'>
             <Header/>
-            {/*<Navbar frndState={appProps.state.sideBar.friends}/>*/}
-            <Navbar frndState={appProps.store.getState().sideBar.friends}/>
+            <Navbar frndState={props.store.getState().sideBar.friends}/>
             <div className='app-wrapper-content'>
 
-                <Route path={'/dialogs'} render={() => <Dialogs
-                    addNewMessage={appProps.store.addNewMessage.bind(appProps.store)} // bind потому что this в вызываемой функции. Иначе undefined
-                    dialogState={state.dialogsPage}/>}/>
-                <Route path={'/profile'} render={() => <Profile
-                    addNewPost={appProps.store.addNewPost.bind(appProps.store)} // bind потому что this в вызываемой функции. Иначе undefined
-                    profileState={state.profilePage}/>}/>
+                <Route path={'/dialogs'} render={() =>
+                    <Dialogs
+                        // addNewMessage={props.store.addNewMessage.bind(props.store)} // bind потому что this в вызываемой функции. Иначе undefined
+                        dialogState={state.dialogsPage}
+                        dispatch={props.store.dispatch.bind(props.store)}/>}
+                />
+                <Route path={'/profile'} render={() =>
+                    <Profile
+                        dispatch={props.store.dispatch.bind(props.store)}
+                        // addNewPost={props.store.addNewPost.bind(props.store)} // bind потому что this в вызываемой функции. Иначе undefined
+                        profileState={state.profilePage}/>}
+                />
 
 
                 <Route path={'/news'} component={News}/>

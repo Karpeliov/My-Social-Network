@@ -1,6 +1,7 @@
-import React, {ChangeEvent, useState} from 'react';
+import React, {ChangeEvent, TextareaHTMLAttributes, useState} from 'react';
 import MyPostCSS from './MyPosts.module.css';
 import Post from "./Post/Post";
+import {addNewPostAC, AddNewPostActionType} from "../../../Redux/State";
 
 export type PostTextType = {
     id: number
@@ -9,9 +10,12 @@ export type PostTextType = {
 
 }
 
+
+
 type postsType = {
     posts: Array<PostTextType>
-    addNewPost: (postMessage: string) => void
+    // addNewPost: (postMessage: string) => void
+    dispatch: (action: AddNewPostActionType) => void
 }
 
 const MyPosts = (props: postsType) => {
@@ -27,7 +31,9 @@ const MyPosts = (props: postsType) => {
     }
 
     const AddNewPost = () => {
-        props.addNewPost(postMessage)
+        // props.addNewPost(postMessage) // так было до dispatch
+        // props.dispatch({type: "ADD_NEW_POST", postMessage: postMessage}) // без Action Creator
+        props.dispatch(addNewPostAC(postMessage)) // с Action Creator
         setPostMessage("")
     }
 
@@ -35,13 +41,14 @@ const MyPosts = (props: postsType) => {
         <div className={MyPostCSS.main}>My Posts</div>
 
         <div>
-             <textarea value={postMessage} onChange={onChangeHandlerNewPost} onKeyPress={(e) => {
+             <textarea cols={75} rows={5} value={postMessage} onChange={onChangeHandlerNewPost} onKeyPress={(e) => {
                  if (e.ctrlKey === true) AddNewPost()}}
              />
             <div>
                 {/*onClick={AddNewPost}*/}
-                <button onClick={AddNewPost}>Add Post</button>
+                <button onClick={AddNewPost} className={MyPostCSS.addPostBtn}>Add Post</button>
             </div>
+
         </div>
 
         <div className={MyPostCSS.main}>

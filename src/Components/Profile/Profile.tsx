@@ -2,24 +2,23 @@ import React from 'react';
 import ContentCSS from './Profile.module.css';
 import MyPosts, {PostTextType} from "./MyPosts/MyPosts";
 import ProfileInfo from './ProfileInfo/ProfileInfo';
+import {AddNewMessageActionType, AddNewPostActionType} from "../../Redux/State";
 
 type postsStateType = {
     posts: Array<PostTextType>
 }
 
 export type ProfilePropsType = {
-    // posts: Array<PostTextType>
     profileState: postsStateType
-    addNewPost: (postMessage: string) => void
+    dispatch: (action: AddNewPostActionType) => void
 }
 
-const Profile = (ProfileProps: ProfilePropsType) => {
+const Profile = (props: ProfilePropsType) => {
 
     return (
         <div>
             <ProfileInfo/>
-
-            <MyPosts addNewPost={ProfileProps.addNewPost} posts={ProfileProps.profileState.posts}/>
+            <MyPosts dispatch={props.dispatch}  posts={props.profileState.posts} />
         </div>
     )
 }
