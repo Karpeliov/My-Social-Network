@@ -3,38 +3,35 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-// import state, {addNewMessage, stateType, subscribe} from './Redux/State';
-// import {addNewPost} from './Redux/State';
 import {BrowserRouter} from "react-router-dom";
-import store from './Redux/State';
+import store from './Redux/redux-store';
+import StoreContext from "./StoreContext";
 
+export type storeType = typeof store
 
 export let RenderEntireTree = () => {
     ReactDOM.render(
         <React.StrictMode>
             <BrowserRouter>
-                {/*<App addNewPost={addNewPost} addNewMessage={addNewMessage}  state={state}/>*/}
-                <App store={store}/>
+                <StoreContext.Provider value={store}>
+                <App
+                    store={store}/>
+                </StoreContext.Provider>
             </BrowserRouter>
         </React.StrictMode>,
         document.getElementById('root')
     );
 }
+RenderEntireTree()
+// RenderEntireTree(store.getState()) // с Редаксом по видео
 
-  RenderEntireTree()
+store.subscribe(RenderEntireTree) // по факту работает так
 
-store.subscribe(RenderEntireTree)
-// subscribe(RenderEntireTree)
-
-// ReactDOM.render(
-//   <React.StrictMode>
-//       <BrowserRouter>
-//     <App addNewPost={addNewPost} state={state} />
-//       </BrowserRouter>
-//   </React.StrictMode>,
-//   document.getElementById('root')
-// );
-
+// store.subscribe(() => {
+//     let state = store.getState()
+//     RenderEntireTree(state)
+// })
+// subscribe(RenderEntireTree)     // с Редаксом по видео
 
 
 // If you want to start measuring performance in your app, pass a function

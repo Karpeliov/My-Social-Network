@@ -4,16 +4,14 @@ import Header from "./Components/Header/Header";
 import Navbar from "./Components/Navbar/Navbar"
 import Profile from "./Components/Profile/Profile";
 import Dialogs from "./Components/Dialogs/Dialogs";
-import {BrowserRouter, Route} from "react-router-dom";
+import {Route} from "react-router-dom";
 import News from "./Components/News/News";
 import Music from "./Components/Music/Music";
 import Settings from "./Components/Settings/Settings";
-import {stateType, storeType} from './Redux/State';
+import {storeType} from "./index";
+import DialogsContainer from "./Components/Dialogs/DialogsContainer";
 
 type appPropsType = {
-    // state: stateType
-    // addNewPost: (postMessage: string) => void
-    // addNewMessage: (message: string, isMine: boolean) => void
     store: storeType
 }
 
@@ -27,16 +25,14 @@ function App(props: appPropsType) {
             <div className='app-wrapper-content'>
 
                 <Route path={'/dialogs'} render={() =>
-                    <Dialogs
-                        // addNewMessage={props.store.addNewMessage.bind(props.store)} // bind потому что this в вызываемой функции. Иначе undefined
-                        dialogState={state.dialogsPage}
-                        dispatch={props.store.dispatch.bind(props.store)}/>}
+                    <DialogsContainer
+                        // store={props.store}
+                    />}
                 />
                 <Route path={'/profile'} render={() =>
                     <Profile
-                        dispatch={props.store.dispatch.bind(props.store)}
-                        // addNewPost={props.store.addNewPost.bind(props.store)} // bind потому что this в вызываемой функции. Иначе undefined
-                        profileState={state.profilePage}/>}
+                        // store={props.store}
+                    />}
                 />
 
 

@@ -3,7 +3,7 @@ import {NavLink} from 'react-router-dom';
 import DialogItem, {dialogsType} from './DialogItem/DialogItem';
 import DialogsStyle from './Dialogs.module.css';
 import Message, {MessPropsType} from './Messages/Messages';
-import {AddNewMessageActionType, AddNewPostActionType, MessType} from "../../Redux/State";
+import {AddNewMessageActionType, MessType} from "../../Redux/dialogs-reduser";
 
 type dialogStateType = {
     dialogs: Array<dialogsType>
@@ -12,7 +12,7 @@ type dialogStateType = {
 
 export type diaPropsType = {
     dialogState: dialogStateType
-    dispatch: (action: AddNewMessageActionType) => void
+    addNewMessage: (MyMessage: string, isMine: boolean) => void
 
 }
 
@@ -29,13 +29,11 @@ const Dialogs = (props: diaPropsType) => {
     const onChangeHandlerMyMessage = (e: ChangeEvent<HTMLTextAreaElement>) => {
         setMyMessage(e.currentTarget.value)
     }
-    // let a = props.dialogState.messages
 
     const addNewMessage = () => {
-        props.dispatch({type: "ADD_NEW_MESSAGE", isMine: true, message: MyMessage})
+        props.addNewMessage(MyMessage, true)
         setMyMessage("")
-        // props.addNewMessage(MyMessage, true) //так было до dispatch
-        // action creator и action type не делал. Не вижу смысла, WS всё подсказывает лучше и удобнее
+
     }
 
     return (
