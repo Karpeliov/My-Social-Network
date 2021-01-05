@@ -51,19 +51,17 @@ let initialDialogState = {
     ] as Array<dialogsType>
 }
 
-
 export const addNewMessageAT = "ADD_NEW_MESSAGE";
+
 
 const dialogsReducer = (dialogState = initialDialogState, action: AddNewMessageActionType): initialDialogStateType => {
 
-
     if (action.type === addNewMessageAT) {
-        let newMessage: MessType;
-        newMessage = {id: 1, message: action.message, isMine: action.isMine};
-        dialogState.messages.push(newMessage)
+        return {
+            ...dialogState,
+            messages: [...dialogState.messages, {id: 1, message: action.message, isMine: action.isMine}]
+        }
     }
-
-
     return dialogState
 }
 

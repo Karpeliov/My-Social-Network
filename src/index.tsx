@@ -5,27 +5,29 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter} from "react-router-dom";
 import store from './Redux/redux-store';
-import StoreContext from "./StoreContext";
+import { Provider } from 'react-redux';
 
 export type storeType = typeof store
 
-export let RenderEntireTree = () => {
+// export let RenderEntireTree = () => {
     ReactDOM.render(
         <React.StrictMode>
             <BrowserRouter>
-                <StoreContext.Provider value={store}>
-                <App
-                    store={store}/>
-                </StoreContext.Provider>
+                <Provider store={store}>
+                    <App />
+                </Provider>
             </BrowserRouter>
         </React.StrictMode>,
         document.getElementById('root')
     );
-}
-RenderEntireTree()
+
+
+
+// }
+// RenderEntireTree()
 // RenderEntireTree(store.getState()) // с Редаксом по видео
 
-store.subscribe(RenderEntireTree) // по факту работает так
+// store.subscribe(RenderEntireTree) // по факту работает так
 
 // store.subscribe(() => {
 //     let state = store.getState()

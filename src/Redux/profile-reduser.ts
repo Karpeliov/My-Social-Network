@@ -41,10 +41,10 @@ let initialProfileState = {
 
 export const profileReducer = (profileState = initialProfileState, action: AddNewPostActionType) => {
     if (action.type === "ADD_NEW_POST") {
-        let newPost: PostTextType;
-        newPost = {id: 4, message: action.postMessage, likeCounts: 0};
-        profileState.posts.unshift(newPost)
-
+        return {
+            ...profileState,
+            posts: [{id: 4, message: action.postMessage, likeCounts: 0}, ...profileState.posts]
+        }
     }
     return profileState
 }

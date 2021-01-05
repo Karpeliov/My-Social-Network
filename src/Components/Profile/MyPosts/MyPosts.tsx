@@ -1,7 +1,6 @@
-import React, {ChangeEvent, TextareaHTMLAttributes, useState} from 'react';
+import React, {ChangeEvent, useState} from 'react';
 import MyPostCSS from './MyPosts.module.css';
 import Post from "./Post/Post";
-import {addNewPostAC, AddNewPostActionType} from "../../../Redux/profile-reduser";
 
 export type PostTextType = {
     id: number
@@ -18,7 +17,7 @@ type postsType = {
 const MyPosts = (props: postsType) => {
 
     let myPostElement = props.posts.map((post) =>
-        <Post message={post.message} likeCounts={post.likeCounts} id={post.id}/>)
+        <Post message={post.message} likeCounts={post.likeCounts} id={post.id} key={post.id}/>)
 
     const [postMessage, setPostMessage] = useState<string>("")
 
@@ -28,8 +27,11 @@ const MyPosts = (props: postsType) => {
     }
 
     const AddNewPost = () => {
-        props.addNewPost(postMessage) // так было до dispatch
-
+        // if (postMessage === "") {
+        //     window.alert("Enter Your Post! You are trying to send the empty post.")
+        // } else
+        props.addNewPost(postMessage)
+        // так было до dispatch
         // props.dispatch({type: "ADD_NEW_POST", postMessage: postMessage}) // без Action Creator
         // props.dispatch(addNewPostAC(postMessage)) // с Action Creator
         setPostMessage("")
@@ -40,7 +42,7 @@ const MyPosts = (props: postsType) => {
 
         <div>
              <textarea cols={75} rows={5} value={postMessage} onChange={onChangeHandlerNewPost} onKeyPress={(e) => {
-                 if (e.ctrlKey === true) AddNewPost()
+                 if (e.ctrlKey) AddNewPost()
              }}
              />
             <div>

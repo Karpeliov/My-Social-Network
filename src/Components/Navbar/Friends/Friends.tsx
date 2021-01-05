@@ -17,7 +17,8 @@ const Friends = (friendsProps: friendsPropsType) => {
 
     let friendsElement = friendsProps.frndState.map((f) => <Friend id={f.id}
                                                                    frndAva={f.frndAva}
-                                                                   frndName={f.frndName}/>)
+                                                                   frndName={f.frndName}
+                                                                   key={f.id}/>)
     return (
         <div className={FrndCss.main}>Friends
             <hr/>
@@ -28,9 +29,9 @@ const Friends = (friendsProps: friendsPropsType) => {
 
 const Friend = (friendProps: friendsType) => {
     return (
-        <div >
+        <div>
             <div className={FrndCss.item}>
-                <div><img src={friendProps.frndAva}/></div>
+                <div><img src={friendProps.frndAva} alt={"Friend's Avatar"}/></div>
                 {friendProps.frndName}
 
             </div>

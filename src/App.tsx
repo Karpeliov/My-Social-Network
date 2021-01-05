@@ -1,49 +1,33 @@
 import React from 'react';
 import './App.css';
 import Header from "./Components/Header/Header";
-import Navbar from "./Components/Navbar/Navbar"
 import Profile from "./Components/Profile/Profile";
-import Dialogs from "./Components/Dialogs/Dialogs";
 import {Route} from "react-router-dom";
 import News from "./Components/News/News";
 import Music from "./Components/Music/Music";
 import Settings from "./Components/Settings/Settings";
-import {storeType} from "./index";
 import DialogsContainer from "./Components/Dialogs/DialogsContainer";
+import NavbarContainer from "./Components/Navbar/NavbarContainer";
 
-type appPropsType = {
-    store: storeType
-}
-
-function App(props: appPropsType) {
-    const state = props.store.getState()
+function App() {
     return (
-
         <div className='app-wrapper'>
             <Header/>
-            <Navbar frndState={props.store.getState().sideBar.friends}/>
+            <NavbarContainer/>
             <div className='app-wrapper-content'>
 
                 <Route path={'/dialogs'} render={() =>
-                    <DialogsContainer
-                        // store={props.store}
-                    />}
-                />
-                <Route path={'/profile'} render={() =>
-                    <Profile
-                        // store={props.store}
-                    />}
-                />
+                    <DialogsContainer/>}/>
 
+                <Route path={'/profile'} render={() =>
+                    <Profile/>}/>
 
                 <Route path={'/news'} component={News}/>
                 <Route path={'/music'} component={Music}/>
                 <Route path={'/settings'} component={Settings}/>
 
-
             </div>
         </div>
-
     );
 }
 
