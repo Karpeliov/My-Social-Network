@@ -26,6 +26,9 @@ const Navbar = (navbarProps: navbarPropsType) => {
                 <NavLink to="/dialogs" activeClassName={NavCSS.activeLink}>Messages</NavLink>
             </div>
             <div className={NavCSS.item}>
+                <NavLink to="/users" activeClassName={NavCSS.activeLink}>Users</NavLink>
+            </div>
+            <div className={NavCSS.item}>
                 <NavLink to="/news" activeClassName={NavCSS.activeLink}>News</NavLink>
             </div>
             <div className={NavCSS.item}>

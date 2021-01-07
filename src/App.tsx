@@ -8,6 +8,9 @@ import Music from "./Components/Music/Music";
 import Settings from "./Components/Settings/Settings";
 import DialogsContainer from "./Components/Dialogs/DialogsContainer";
 import NavbarContainer from "./Components/Navbar/NavbarContainer";
+import Users from "./Components/Users/Users";
+import UsersContainer from "./Components/Users/UsersContainer";
+
 
 function App() {
     return (
@@ -22,6 +25,8 @@ function App() {
                 <Route path={'/profile'} render={() =>
                     <Profile/>}/>
 
+                <Route path={'/users'} render={() =>
+                    <UsersContainer/>}/>
                 <Route path={'/news'} component={News}/>
                 <Route path={'/music'} component={Music}/>
                 <Route path={'/settings'} component={Settings}/>

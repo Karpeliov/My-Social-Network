@@ -48,7 +48,7 @@ let initialDialogState = {
             diaAva: "https://pbs.twimg.com/profile_images/687223253794975745/p9uL7dIS.jpg"
         },
         {id: 4, name: 'Penguin', diaAva: "https://www.shareicon.net/data/2016/01/05/233521_penguin_256x256.png"}
-    ] as Array<dialogsType>
+    ]  as Array<dialogsType>
 }
 
 export const addNewMessageAT = "ADD_NEW_MESSAGE";

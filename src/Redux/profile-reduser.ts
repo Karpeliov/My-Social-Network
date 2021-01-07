@@ -2,6 +2,7 @@ export type AddNewPostActionType = {
     type: "ADD_NEW_POST"
     postMessage: string
 }
+type ActionType = AddNewPostActionType
 
 export const addNewPostAC = (postMessage: string): AddNewPostActionType => {
     return {
@@ -10,6 +11,8 @@ export const addNewPostAC = (postMessage: string): AddNewPostActionType => {
     }
 }
 
+
+
 export type PostTextType = {
     id: number
     message: string
@@ -17,11 +20,8 @@ export type PostTextType = {
 
 }
 
-// export type initialProfileStateType = {
-//     posts: Array<PostTextType>
-// }
 
-export type initialProfileStateType = typeof initialProfileState
+ export type initialProfileStateType = typeof initialProfileState
 
 let initialProfileState = {
     posts: [
@@ -39,7 +39,7 @@ let initialProfileState = {
     ] as Array<PostTextType>
 }
 
-export const profileReducer = (profileState = initialProfileState, action: AddNewPostActionType) => {
+export const profileReducer = (profileState = initialProfileState, action: ActionType): initialProfileStateType => {
     if (action.type === "ADD_NEW_POST") {
         return {
             ...profileState,
