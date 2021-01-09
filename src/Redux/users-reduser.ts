@@ -1,13 +1,11 @@
-import {v1} from "uuid"
-import {PostTextType} from "./profile-reduser";
 
 export type followActionType = {
     type: "FOLLOW"
-    userId: string
+    userId: number
 }
 export type unFollowActionType = {
     type: "UNFOLLOW"
-    userId: string
+    userId: number
 }
 export type addUsersActionType = {
     type: "ADD_USERS"
@@ -19,19 +17,19 @@ type ActionType = followActionType | unFollowActionType | addUsersActionType
 export type initialUserStateType = typeof initialUserState
 
 export type UserType = {
-    id: string
+    id: number
     followed: boolean
-    fullName: string
+    name: string
     status: string
     location: { country: string, city: string }
-    photoURL: string
+    photos: { small: string, large: string }
 }
 
 let initialUserState = {
     users: [] as Array<UserType>
 }
 
-const usersReducer = (state: initialUserStateType = initialUserState, action: ActionType): initialUserStateType => {
+const usersReducer = (state = initialUserState, action: ActionType): initialUserStateType => {
 
     switch (action.type) {
 
@@ -50,21 +48,20 @@ const usersReducer = (state: initialUserStateType = initialUserState, action: Ac
                 })
             }
         case "ADD_USERS": {
-             return {...state, users: [...state.users, ...action.users]} // так добавляет юзеров из Users 2 раза
-            // return {...state, users: [ ...action.users]}
+            return {...state, users: [...action.users]}
         }
         default:
             return state
     }
 }
 
-export const followAC = (userId: string): followActionType => {
+export const followAC = (userId: number): followActionType => {
     return {
         type: "FOLLOW",
         userId: userId
     } as const
 }
-export const unFollowAC = (userId: string): unFollowActionType => {
+export const unFollowAC = (userId: number): unFollowActionType => {
     return {
         type: "UNFOLLOW",
         userId: userId
