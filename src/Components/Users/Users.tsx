@@ -1,31 +1,42 @@
 import React from "react";
-import {UserType} from "../../Redux/users-reduser";
 import styles from "./Users.module.css";
-import axios from "axios";
 import defaultUserImg from "../../assets/images/images.png"
+import {UserType} from "../../Redux/users-reduser";
+import {NavLink} from 'react-router-dom';
 
 export type UsersPropsType = {
+    totalUsersCount: number
+    pageNumber: number
+    pageSize: number
+    currentPage: number
     users: Array<UserType>
-    unFollow: (userID: number) => void
     follow: (userID: number) => void
-    addUsers: (users: Array<UserType>) => void
+    unFollow: (userID: number) => void
+    onPageChange: (pageNumber: number) => void
 }
 
 let Users = (props: UsersPropsType) => {
-    let getUsers = () => {
-        if (props.users.length === 0) {
 
-            axios.get("https://social-network.samuraijs.com/api/1.0/users").then(response => {
-                props.addUsers(response.data.items)
-            })
-        }
+    let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
+
+    let pages: any[] = []
+    for (let i = 1; i <= pagesCount; i++) {
+        pages.push(i)
     }
-
-    return <div>
-        <button onClick={getUsers}>Get Users</button>
-        {props.users.map(u => <div key={u.id}>
+    return <div className={styles.users}>
+        <div>
+            {pages.map((p) => {
+                return <span className={(props.currentPage === p) ? styles.selectedPage : ""}
+                             onClick={() => {
+                                 props.onPageChange(p)
+                             }}> {p} </span>
+            })}
+        </div>
+        {props.users.map((u: UserType) => <div key={u.id}>
             <span>
-                <img className={styles.photo} src={u.photos.small != null ? u.photos.small : defaultUserImg}/>
+                <NavLink to={'/profile/' + u.id}>
+                    <img className={styles.photo} src={u.photos.small != null ? u.photos.small : defaultUserImg}/>
+                </NavLink>
             </span>
             <span>
                 <span>
@@ -49,19 +60,3 @@ let Users = (props: UsersPropsType) => {
 }
 
 export default Users
-
-//[
-// {
-//     id: 1, followed: true, fullName: "Sasha", status: "Fuck the belarusian police",
-//     location: {country: "Poland", city: "Warshaw"},
-//     photoURL: "https://avatars3.githubusercontent.com/u/74488783?s=460&u=ca6052fdbd88d964747449d3d0c250741e0c85ac&v=4"
-// },
-// {
-//     id: 2, followed: true, fullName: "Yania", status: "Poland rules!",
-//     location: {country: "Poland", city: "Warshaw"}, photoURL: ""
-// },
-// {
-//     id: 3, followed: false, fullName: "Kira", status: "I'm a Unicorn",
-//     location: {country: "Poland", city: "Warshaw"}, photoURL: ""
-// },
-//]

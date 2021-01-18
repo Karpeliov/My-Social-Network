@@ -8,8 +8,9 @@ import Music from "./Components/Music/Music";
 import Settings from "./Components/Settings/Settings";
 import DialogsContainer from "./Components/Dialogs/DialogsContainer";
 import NavbarContainer from "./Components/Navbar/NavbarContainer";
-import Users from "./Components/Users/Users";
+import UsersOld from "./Components/Users/UsersOld";
 import UsersContainer from "./Components/Users/UsersContainer";
+import ProfileContainer from "./Components/Profile/ProfileContainer";
 
 
 function App() {
@@ -22,8 +23,8 @@ function App() {
                 <Route path={'/dialogs'} render={() =>
                     <DialogsContainer/>}/>
 
-                <Route path={'/profile'} render={() =>
-                    <Profile/>}/>
+                <Route path={'/profile/:userId?'} render={() =>
+                    <ProfileContainer />}/>
 
                 <Route path={'/users'} render={() =>
                     <UsersContainer/>}/>

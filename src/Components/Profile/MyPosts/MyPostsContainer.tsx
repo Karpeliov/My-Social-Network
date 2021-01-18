@@ -1,6 +1,6 @@
-import {addNewPostAC} from "../../../Redux/profile-reduser";
+import {addNewPost, setUserProfile} from "../../../Redux/profile-reduser";
 import MyPosts from "./MyPosts";
-import {DispatchType, RootStateType} from "../../../Redux/redux-store";
+import {RootStateType} from "../../../Redux/redux-store";
 import {connect} from "react-redux";
 
 let mapStateToProps = (state: RootStateType) => {
@@ -9,13 +9,13 @@ let mapStateToProps = (state: RootStateType) => {
     }
 }
 
-let mapDispatchToProps = (dispatch: DispatchType) => {
-    return {
-        addNewPost: (postMessage: string) => {dispatch(addNewPostAC(postMessage))}
-    }
-}
+// let mapDispatchToProps = (dispatch: DispatchType) => {
+//     return {
+//         addNewPost: (postMessage: string) => {dispatch(addNewPost(postMessage))}
+//     }
+// }
 
-const MyPostsContainer = connect(mapStateToProps, mapDispatchToProps)(MyPosts)
+const MyPostsContainer = connect(mapStateToProps, {addNewPost, setUserProfile})(MyPosts)
 
 export default MyPostsContainer;
 

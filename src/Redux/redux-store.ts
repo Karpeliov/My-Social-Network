@@ -13,7 +13,11 @@ export let reducers = combineReducers({
 
 let store = createStore(reducers)
 
+ // window.store = store
+
 export type RootStateType = ReturnType<typeof reducers>
 export type DispatchType = ReturnType<typeof store.dispatch>
+
+
 
 export default store
