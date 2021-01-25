@@ -6,3 +6,21 @@
 .header img {
     width: 100px;
 }
+
+.loginBlock {
+    float: right;
+}
+
+.loginBlock a {
+    color: #d04646;
+    font-weight: bold;
+    text-decoration: none;
+
+}
+
+.loginBlock a.activeLink {
+    color: #d04646;
+    font-weight: bold;
+    background-color: #f1f5f1;
+    text-decoration: none;
+}

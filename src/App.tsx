@@ -11,12 +11,13 @@ import NavbarContainer from "./Components/Navbar/NavbarContainer";
 import UsersOld from "./Components/Users/UsersOld";
 import UsersContainer from "./Components/Users/UsersContainer";
 import ProfileContainer from "./Components/Profile/ProfileContainer";
+import HeaderContainer from "./Components/Header/Header.container";
 
 
 function App() {
     return (
         <div className='app-wrapper'>
-            <Header/>
+            <HeaderContainer/>
             <NavbarContainer/>
             <div className='app-wrapper-content'>
 
