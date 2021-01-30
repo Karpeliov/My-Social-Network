@@ -1,3 +1,6 @@
+import {DispatchType} from "./redux-store";
+import {authAPI} from "../api/api";
+
 export type initialStateType = {
     userId: null | number
     email: null | string
@@ -29,7 +32,9 @@ const authReducer = (state: initialStateType = initialState, action: ActionType)
             return {
                 ...state,
                 ...action.data,
-                isAuth: true
+                 isAuth: true
+                // для проверки
+                // isAuth: false
             }
     }
 
@@ -46,6 +51,18 @@ export const setAuthUserData = (userId: null | number, email: null | string, log
             email,
             login
         }
+
+    }
+}
+
+export const getAuth = () => {
+    return (dispatch: DispatchType) => {
+        authAPI.getAuth().then(data => {
+            if (data.resultCode === 0) {
+                let {id, email, login} = data.data
+                dispatch(setAuthUserData(id, email, login))
+            }
+        })
 
     }
 }

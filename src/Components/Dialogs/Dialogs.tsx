@@ -3,6 +3,7 @@ import DialogItem, {dialogsType} from './DialogItem/DialogItem';
 import DialogsStyle from './Dialogs.module.css';
 import Message from './Messages/Messages';
 import {MessType} from "../../Redux/dialogs-reduser";
+import { Redirect } from 'react-router-dom';
 
 type dialogStateType = {
     dialogs: Array<dialogsType>
@@ -12,7 +13,7 @@ type dialogStateType = {
 export type diaPropsType = {
     dialogState: dialogStateType
     addNewMessage: (MyMessage: string, isMine: boolean) => void
-
+    isAuth: boolean | undefined
 }
 
 const Dialogs = (props: diaPropsType) => {
@@ -37,6 +38,8 @@ const Dialogs = (props: diaPropsType) => {
         setMyMessage("")
 
     }
+
+   if (!props.isAuth) return <Redirect to={"/login"}/>
 
     return (
         <div className={DialogsStyle.dialogs}>
