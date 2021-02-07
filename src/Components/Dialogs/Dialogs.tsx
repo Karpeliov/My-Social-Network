@@ -13,7 +13,7 @@ type dialogStateType = {
 export type diaPropsType = {
     dialogState: dialogStateType
     addNewMessage: (MyMessage: string, isMine: boolean) => void
-    isAuth: boolean | undefined
+    // isAuth: boolean | undefined
 }
 
 const Dialogs = (props: diaPropsType) => {
@@ -38,8 +38,6 @@ const Dialogs = (props: diaPropsType) => {
         setMyMessage("")
 
     }
-
-   if (!props.isAuth) return <Redirect to={"/login"}/>
 
     return (
         <div className={DialogsStyle.dialogs}>

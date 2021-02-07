@@ -6,7 +6,7 @@ export type initialStateType = {
     email: null | string
     login: null | string
     isAuth?: boolean
-    // sFetching: boolean
+    // isFetching: boolean
 }
 
 // export type initialSideBarState = typeof initialState
@@ -32,9 +32,7 @@ const authReducer = (state: initialStateType = initialState, action: ActionType)
             return {
                 ...state,
                 ...action.data,
-                 isAuth: true
-                // для проверки
-                // isAuth: false
+                isAuth: true
             }
     }
 
