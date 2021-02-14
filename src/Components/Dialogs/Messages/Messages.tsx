@@ -7,10 +7,10 @@ export type MessPropsType = {
     isMine: boolean
 }
 
-const Message = (MessProps: MessPropsType) => {
+const Message = (props: MessPropsType) => {
     return (
-        <div className={MessProps.isMine === true ? MessagesStyle.my_Message : MessagesStyle.message}>
-            {MessProps.message} </div>
+        <div className={props.isMine === true ? MessagesStyle.my_Message : MessagesStyle.message}>
+            {props.message} </div>
 
     )
 }

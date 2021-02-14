@@ -1,4 +1,5 @@
 import axios from "axios";
+import {AuthLoginType} from "../Components/Login/Login";
 
 const instance = axios.create({
     withCredentials: true,
@@ -40,16 +41,43 @@ export const usersAPI = {
     },
 
     setUserProfile(userId: number) {
-        return instance.get(`profile/` + userId)
+        // return instance.get(`profile/` + userId)
+        return profileAPI.setUserProfile(userId)
 
     }
+}
+
+export const profileAPI = {
+
+    setUserProfile(userId: number) {
+        return instance.get(`profile/` + userId)
+    },
+
+    getStatus(userId: number) {
+        return instance.get(`profile/status/` + userId)
+    },
+
+    updateStatus(status: string) {
+        return instance.put(`profile/status/`, {status} )
+    },
 }
 
 export const authAPI = {
     getAuth() {
         return instance.get(`auth/me`)
             .then(r => r.data)
-    }
+    },
+    //
+    // login(email: string, password: string, rememberMe: boolean) {
+    //     return instance.post(`auth/login/`, {email, password, rememberMe})
+    //         .then(r => r.data)
+    // },
+    login(loginData: AuthLoginType) {
+        return instance.post(`auth/login/`, {loginData})
+            .then(r => r.data)
+    },
+
+
 }
 
 

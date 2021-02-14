@@ -1,16 +1,17 @@
-import React, {useState} from 'react';
+import React, {ChangeEvent, useState} from 'react';
 import ContentCSS from './ProfileInfo.module.css';
 import {ProfileType} from "../../../Redux/profile-reduser";
 
 type ProfileStatusPropsType = {
     status: string
+    // updateStatus: (status: string) => string
 }
 
 
 // function component with useState
 // const ProfileStatus = (props: ProfileStatusPropsType) => {
 //
-//     const [value, setValue] = useState(props.status)
+//     const [status, setStatus] = useState(props.status)
 //     const [editMode, setEditMode] = useState(false)
 //
 //
@@ -20,14 +21,15 @@ type ProfileStatusPropsType = {
 //                 ?
 //                 <div>
 //                     <input
-//                         value={value}
+//                         autoFocus
+//                         value={status}
 //                         onBlur={() => setEditMode(false)}
-//                         onChange={(e) => setValue(e.currentTarget.value)}/>
+//                         onChange={(e) => setStatus(e.currentTarget.value)}/>
 //                 </div>
 //                 :
 //                 <div>
 //                         <span
-//                             onDoubleClick={() => setEditMode(true)}>{props.status} </span>
+//                             onDoubleClick={() => setEditMode(true)}>{this.props.status} </span>
 //                 </div>
 //             }
 //
@@ -43,7 +45,7 @@ class ProfileStatus extends React.Component<any, any> {
 
     state = {
         editMode: false,
-        value: ""
+        status: this.props.status
     }
 
     activateEditMode = () => {
@@ -52,11 +54,22 @@ class ProfileStatus extends React.Component<any, any> {
 
     deactivateEditMode = () => {
         this.setState({editMode: false})
+
+        this.props.updateStatus(this.state.status)
     }
 
-    // changeValue = () => {
-    //     this.setState({value: false})
-    // }
+    onStatusChange = (e: ChangeEvent<HTMLInputElement>) => {
+        this.setState({
+            status: e.currentTarget.value
+        })
+    }
+
+    componentDidUpdate(prevProps: Readonly<any>, prevState: Readonly<any>, snapshot?: any) {
+        if (prevProps.status !== this.props.status)
+        this.setState({
+            status: this.props.status
+        })
+    }
 
     render() {
         return (
@@ -66,15 +79,15 @@ class ProfileStatus extends React.Component<any, any> {
                 <div>
                     <input
                         autoFocus
-                        value={this.state.value}
+                        value={this.state.status}
                         onBlur={this.deactivateEditMode}
-                        //onChange={(e) => setValue(e.currentTarget.value)}
+                        onChange={this.onStatusChange}
                     />
                 </div>}
                 {!this.state.editMode &&
                 <div>
                         <span
-                            onClick={() => this.activateEditMode()}>{this.props.status}
+                            onClick={() => this.activateEditMode()}>{this.props.status || "No status"}
                         </span>
                 </div>
                 }

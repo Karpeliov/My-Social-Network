@@ -1,6 +1,9 @@
 import React, {ChangeEvent, useState} from 'react';
 import MyPostCSS from './MyPosts.module.css';
 import Post from "./Post/Post";
+import {Field, reduxForm} from "redux-form";
+import {maxLengthCreator, minLengthCreator, required} from "../../../utils/validators/validators";
+import {TextAria} from "../../common/FormsControls/FormsControls";
 
 export type PostTextType = {
     id: number
@@ -27,39 +30,52 @@ const MyPosts = (props: postsType) => {
     }
 
     const AddNewPost = () => {
-        // if (postMessage === "") {
-        //     window.alert("Enter Your Post! You are trying to send the empty post.")
-        // } else
         props.addNewPost(postMessage)
-        // так было до dispatch
-        // props.dispatch({type: "ADD_NEW_POST", postMessage: postMessage}) // без Action Creator
-        // props.dispatch(addNewPostAC(postMessage)) // с Action Creator
         setPostMessage("")
+    }
+
+    const onSubmit = (formData: any) => {
+        console.log(formData.myNewPost)
+        props.addNewPost(formData.myNewPost)
     }
 
     return <div>
         <div className={MyPostCSS.main}>My Posts</div>
 
-        <div>
-             <textarea cols={75} rows={5} value={postMessage} onChange={onChangeHandlerNewPost} onKeyPress={(e) => {
-                 if (e.ctrlKey) AddNewPost()
-             }}
-             />
-            <div>
-                {/*onClick={AddNewPost}*/}
-                <button onClick={AddNewPost} className={MyPostCSS.addPostBtn}>Add Post</button>
-            </div>
-
-        </div>
+        {/*<div>*/}
+        {/*     <textarea cols={75} rows={5} value={postMessage} onChange={onChangeHandlerNewPost} onKeyPress={(e) => {*/}
+        {/*         if (e.ctrlKey) AddNewPost()*/}
+        {/*     }}*/}
+        {/*     />*/}
+        {/*    <div>*/}
+        {/*        /!*onClick={AddNewPost}*!/*/}
+        {/*        <button onClick={AddNewPost} className={MyPostCSS.addPostBtn}>Add Post</button>*/}
+        {/*    </div>*/}
+        {/*</div>*/}
+        <MyPostReduxForm onSubmit={onSubmit}/>
 
         <div className={MyPostCSS.main}>
             New Post
         </div>
         {myPostElement}
-        {/*было так*/}
-        {/*<Post  message = {Posts[0].message} likeCounts={Posts[0].likeCounts} id={Posts[0].id}/>*/}
-
     </div>
 }
+let maxLengthCreator10 = maxLengthCreator(10)
+let minLengthCreator2 = minLengthCreator(2)
+
+const MyPostForm = (props: any) => {
+    return <form onSubmit={props.handleSubmit}>
+        <Field cols={75} rows={5} name={"myNewPost"} component={TextAria} placeholder={"Post"}
+               validate={[required, maxLengthCreator10, minLengthCreator2]}
+        />
+        <div>
+            <button className={MyPostCSS.addPostBtn}>
+                Add Post
+            </button>
+        </div>
+    </form>
+}
+
+const MyPostReduxForm = reduxForm({form: 'MyPost'})(MyPostForm)
 
 export default MyPosts;

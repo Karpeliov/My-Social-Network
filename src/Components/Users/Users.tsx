@@ -26,8 +26,8 @@ let Users = (props: UsersPropsType) => {
     }
     return <div className={styles.users}>
         <div>
-            {pages.map((p) => {
-                return <span className={(props.currentPage === p) ? styles.selectedPage : ""}
+            {pages.map((p, index) => {
+                return <span key={index} className={(props.currentPage === p) ? styles.selectedPage : ""}
                              onClick={() => {
                                  props.onPageChange(p)
                              }}> {p} </span>

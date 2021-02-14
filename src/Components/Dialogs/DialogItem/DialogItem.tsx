@@ -12,7 +12,7 @@ export type dialogsType = {
 const DialogItem = (diaProps: dialogsType) => {
     return (
         <div className={DialogItemStyle.dialog}>
-            <img src={diaProps.diaAva}/>
+            <img src={diaProps.diaAva} alt={"avatar"}/>
 
             <NavLink to={"/dialogs/" + diaProps.id} activeClassName={DialogItemStyle.active}>
                 {diaProps.name}
