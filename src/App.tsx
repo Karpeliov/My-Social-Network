@@ -10,6 +10,8 @@ import UsersContainer from "./Components/Users/UsersContainer";
 import ProfileContainer from "./Components/Profile/ProfileContainer";
 import HeaderContainer from "./Components/Header/Header.container";
 import Login from "./Components/Login/Login";
+import {useSelector} from "react-redux";
+import {RootStateType} from "./Redux/redux-store";
 
 
 function App() {
@@ -23,7 +25,7 @@ function App() {
                     <DialogsContainer/>}/>
 
                 <Route path={'/profile/:userId?'} render={() =>
-                    <ProfileContainer />}/>
+                    <ProfileContainer/>}/>
 
                 <Route path={'/users'} render={() =>
                     <UsersContainer/>}/>

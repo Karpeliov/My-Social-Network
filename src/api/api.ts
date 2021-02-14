@@ -58,7 +58,7 @@ export const profileAPI = {
     },
 
     updateStatus(status: string) {
-        return instance.put(`profile/status/`, {status} )
+        return instance.put(`profile/status/`, {status})
     },
 }
 
@@ -67,16 +67,20 @@ export const authAPI = {
         return instance.get(`auth/me`)
             .then(r => r.data)
     },
-    //
-    // login(email: string, password: string, rememberMe: boolean) {
-    //     return instance.post(`auth/login/`, {email, password, rememberMe})
+
+    login(email: string, password: string, rememberMe: boolean = false) {
+        return instance.post(`auth/login/`, {email, password, rememberMe})
+           // .then(r => r.data)
+    },
+    // login(loginData: AuthLoginType) {
+    //     return instance.post(`auth/login/`, {loginData})
     //         .then(r => r.data)
     // },
-    login(loginData: AuthLoginType) {
-        return instance.post(`auth/login/`, {loginData})
-            .then(r => r.data)
-    },
 
+    logout() {
+        return instance.delete(`auth/login/`)
+           // .then(r => r.data)
+    },
 
 }
 
